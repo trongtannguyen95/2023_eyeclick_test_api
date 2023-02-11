@@ -15,7 +15,6 @@ export interface IBaseService<T> {
     listResource(filters: FiltersDto | any, metaData: ResourceMetaData, user?: UserModel, permission?: number): any;
     detailResource(id: string | number, metaData?: ResourceMetaData): any;
     exportResource(filters: FiltersDto | any, metaData: ResourceMetaData, user?: UserModel, permission?: number): any;
-    getAclFilter(filters: any, user?: UserModel, permissionNumber?: number): any;
     getModel(): Model<any>;
     getFields(metaData: ResourceMetaData, forAction?: string): any;
 }

@@ -4,8 +4,8 @@ export const UsersResourceMetadata = defineResourceMetaData({
     module: 'users',
     resource: 'users',
     softDelete: true,
-    auditActions: ['create', 'update', 'delete', 'export', 'import'],
-    actions: ['list', 'detail', 'create', 'update', 'delete', 'export', 'import'],
+    auditActions: [],
+    actions: ['list', 'detail'],
     fields: [
         {
             name: 'name',

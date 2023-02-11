@@ -1,10 +1,3 @@
-export interface AclModel {
-    module: string;
-    resource: string;
-    action: string;
-    permission?: string | number;
-}
-
 export interface UserModel {
     id?: string;
     username?: string;

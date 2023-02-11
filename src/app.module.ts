@@ -5,14 +5,13 @@ import { AppController } from './app.controller';
 import { HttpMiddleware } from './middlewares/http.middleware';
 import { BaseModule } from './modules/base/base.module';
 import { SharedModule } from './modules/shared/shared.module';
-import { SystemsModule } from './modules/systems/system.module';
 import { UsersModule } from './modules/users/users.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 const routes: Routes = [
     {
         path: '/admin',
-        children: [UsersModule, SystemsModule],
+        children: [UsersModule],
     },
     {
         path: '/app',
@@ -33,7 +32,6 @@ const routes: Routes = [
             autoIndex: true,
         }),
         UsersModule,
-        SystemsModule,
         RouterModule.register(routes),
         ThrottlerModule.forRoot({
             ttl: 60,

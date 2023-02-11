@@ -60,9 +60,9 @@ export const ControllerBaseDecorator = (options: BaseControllerOptions): ClassDe
 };
 
 export function BaseControllerFactory<T extends Document>(options: BaseControllerOptions): BaseConstructor {
-    class CFiltersDto extends (options.cFiltersDto ? options.cFiltersDto : FiltersDto) {}
-    class UpdateDto extends (options.cUpdateDto ? options.cUpdateDto : BaseDto) {}
-    class CreateDto extends (options.cCreateDto ? options.cCreateDto : BaseDto) {}
+    class CFiltersDto extends (options.cFiltersDto ? options.cFiltersDto : FiltersDto) { }
+    class UpdateDto extends (options.cUpdateDto ? options.cUpdateDto : BaseDto) { }
+    class CreateDto extends (options.cCreateDto ? options.cCreateDto : BaseDto) { }
 
     Object.defineProperty(CFiltersDto, 'name', {
         value: options.cFiltersDto !== undefined ? options.cFiltersDto.name : FiltersDto.name,
@@ -457,11 +457,7 @@ export function BaseControllerFactory<T extends Document>(options: BaseControlle
 
         checkAuth(user: UserModel, action: string) {
             if (options.isAuth) {
-                const check = checkAuth(user, {
-                    module: options.metaData.module,
-                    resource: options.metaData.resource,
-                    action: action,
-                });
+                const check = checkAuth(user);
                 // Logger.log(check, 'checkAuth');
                 if (!check) {
                     throw new HttpException('Permission denied', HttpStatus.UNAUTHORIZED);

@@ -50,8 +50,6 @@ export class UsersController extends BaseController {
         };
         try {
             const userDoc = await this.usersService.findOne({ _id: user.id });
-            const acls = await this.usersService.getUserAcls(userDoc);
-            user.acls = acls;
             user.createdAt = userDoc['createdAt'];
             responseBody.data = user;
             return res.status(HttpStatus.OK).json(responseBody);

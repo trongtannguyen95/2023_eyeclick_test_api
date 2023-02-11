@@ -6,7 +6,6 @@ import { ResourceMetaData, FieldModel } from './models/resource-metadata.model';
 import { FiltersDto, SortDto, SearchsDto } from './dtos/filters.dto';
 import { parseStringToJson } from '~/helpers/util.helper';
 import { UserModel } from '~users/models/user.model';
-import { getAclFilters } from '~users/helpers/auth.helper';
 import { ObjectId } from 'mongodb';
 
 @Injectable()
@@ -122,7 +121,6 @@ export class MBaseService<T extends Document> implements IBaseService<T> {
         }
         if (user) {
             searchOption = this.getExtraFilters(searchOption, user);
-            searchOption = await this.getAclFilter(searchOption, user, permissionNumber);
         }
 
         // Logger.log(filters);
@@ -198,15 +196,6 @@ export class MBaseService<T extends Document> implements IBaseService<T> {
         }
         return mapSearch;
     }
-
-    async getAclFilter(filters: any, user?: UserModel, permissionNumber?: number) {
-        const aclFilters = getAclFilters(user, permissionNumber);
-        if (aclFilters !== 'all') {
-            filters = { ...filters, ...aclFilters };
-        }
-        return filters;
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getExtraFilters(filters: SearchsDto | any, user?: UserModel) {
         return filters;
