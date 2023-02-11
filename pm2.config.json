@@ -1,0 +1,29 @@
+{
+    "apps": [
+        {
+            "name": "2022-signify-retailer-api",
+            "script": "dist/main.js",
+            "args": "",
+            "instances": 1,
+            "autorestart": true,
+            "watch": false,
+            "max_memory_restart": "4G",
+            "env": {
+                "NODE_ENV": "production",
+                "APP_PORT": 3000
+            },
+            "env_development": {
+                "NODE_ENV": "local",
+                "APP_PORT": 3000
+            },
+            "env_staging": {
+                "NODE_ENV": "staging",
+                "APP_PORT": 3000
+            },
+            "env_production": {
+                "NODE_ENV": "production",
+                "APP_PORT": 3000
+            }
+        }
+    ]
+}

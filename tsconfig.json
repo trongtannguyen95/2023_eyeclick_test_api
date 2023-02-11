@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": false,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "~base/*": ["src/modules/base/*"],
+      "~shared/*": ["src/modules/shared/*"],
+      "~systems/*": ["src/modules/systems/*"],
+      "~users/*": ["src/modules/users/*"],
+      "~chat/*": ["src/modules/chat/*"],
+      "~mini/*": ["src/modules/mini/*"],
+      "~quiz/*": ["src/modules/quiz/*"],
+      "~players/*": ["src/modules/players/*"],
+      "~helpers/*": ["src/helpers/*"],
+      "~zalo/*": ["src/modules/zalo/*"],
+      "~socket/*": ["src/modules/socket/*"],
+
+      "~/*": ["src/*"],
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
