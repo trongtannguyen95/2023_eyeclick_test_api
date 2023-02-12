@@ -12,7 +12,7 @@ import { UserModel } from '../models/user.model';
 import { RequestForgotPasswordsService } from '../services/request-forgot-passwords.service';
 import { UserTokensService } from '../services/user-tokens.service';
 import { UsersService } from '../services/users.service';
-
+import { UserRegisterDto } from '~users/dtos/user.dto';
 @Controller('auth')
 @ApiTags('users - auth resource')
 export class AuthController {
@@ -220,7 +220,7 @@ export class AuthController {
                 { username: 'normaluser' },
                 {
                     username: 'normaluser',
-                    password: hashSync('normaluser@2022', 10),
+                    password: hashSync('normaluser@2023', 10),
                     isAdministrator: 0,
                     email: 'normaluser@normaluser.com',
                     phone: '0962548587',
@@ -233,9 +233,10 @@ export class AuthController {
                 { username: 'administrator' },
                 {
                     username: 'administrator',
-                    password: hashSync('administrator@2022', 10),
+                    password: hashSync('administrator@2023', 10),
                     isAdministrator: 1,
                     email: 'system@system.com',
+                    name: 'Admin User',
                     phone: '0962548587',
                     status: 1,
                     deleted: 0,
@@ -247,5 +248,70 @@ export class AuthController {
         }
         responseData.message = 'can not get administrator account in production mode!';
         return res.status(HttpStatus.OK).json(responseData);
+    }
+
+    @Post('register')
+    @ApiOperation({ description: 'users register' })
+    @ApiResponse({ status: 200, description: 'registered successfully.' })
+    async register(
+        @Res() res: Response,
+        @Body() body: UserRegisterDto,
+        @Req() req: Request,
+    ) {
+        const responseData: ResponseBody = { statusCode: 200 };
+        try {
+            if(body['confirmPassword'] != body['password']){
+                responseData.statusCode = 422;
+                responseData.error = 'Password confirm is not correct';
+                return res.status(HttpStatus.OK).json(responseData);
+
+            }
+            const user = await this.usersService.create(
+                {
+                    username: body.username,
+                    password: hashSync(body.password, 10),
+                    isAdministrator: 0,
+                    email: body.email,
+                    address: body.address,
+                    name: body.name,
+                    phone: body.phone || 'N/A',
+                    status: 1,
+                    deleted: 0,
+                },
+            );
+            if(user){
+                const userInfo = {
+                    id: user.id,
+                    name: user.name || 'N/A',
+                    username: user.username,
+                    email: user.email || 'N/A',
+                    avartar: 'N/A',
+                    fullName: user.name,
+                    isAdministrator: user.isAdministrator,
+                } as UserModel;
+                const token = this.jwtService.sign(userInfo);
+
+                const checkSaveToken = await this.userTokensService.createLogToken(
+                    req.ip,
+                    req.headers['user-agent'],
+                    userInfo,
+                    token,
+                );
+                responseData.error = !checkSaveToken ? 'token not save!' : '';
+                responseData.data = token;
+                responseData.message = 'Registered successfully';
+            }else{
+                responseData.statusCode = 400;
+                responseData.error = 'Registered unsuccessfully';
+            }
+            return res.status(HttpStatus.OK).json(responseData);
+
+        } catch (error) {
+            responseData.statusCode = 500;
+            responseData.data = null;
+            responseData.error = `AuthController: Error ${error.message}`;
+            Logger.error(`AuthController: Error ${error.message}`);
+            return res.status(HttpStatus.OK).json(responseData);
+        }
     }
 }

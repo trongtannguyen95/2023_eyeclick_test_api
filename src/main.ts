@@ -19,12 +19,7 @@ async function bootstrap() {
 
     app = await NestFactory.create<NestExpressApplication>(AppModule, { logger: ['debug', 'warn'] });
 
-    app.enableCors({
-        optionsSuccessStatus: 200,
-        preflightContinue: false,
-        credentials: true,
-        exposedHeaders: ['Retry-After'],
-    });
+    app.enableCors();
 
     // if (process.env.isDev) {
     //     buildSwagger(app);

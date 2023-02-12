@@ -11,11 +11,11 @@ import { ConfigModule } from '@nestjs/config';
 const routes: Routes = [
     {
         path: '/admin',
-        children: [UsersModule],
+        children: [],
     },
     {
         path: '/app',
-        children: [],
+        children: [UsersModule],
     },
 ];
 

@@ -16,6 +16,32 @@ export class ChangeUserPasswordDto {
     @ApiProperty({ required: false })
     readonly confirmPassword: string;
 }
+export class UserRegisterDto {
+    @Expose()
+    @ApiProperty({ required: false })
+    readonly name: string;
+    @Expose()
+    @ApiProperty({ required: true })
+    @IsAlreadyExist({ service: UsersService, key: 'username' })
+    readonly username: string;
+    @Expose()
+    @ApiProperty({ required: true })
+    password: string;
+    @Expose()
+    @ApiProperty({ required: true })
+    confirmPassword: string;
+    @Expose()
+    @ApiProperty({ required: false })
+    readonly phone: string;
+    @IsEmail()
+    @IsAlreadyExist({ service: UsersService, key: 'email' })
+    @Expose()
+    @ApiProperty({ required: true })
+    readonly email: string;
+    @Expose()
+    @ApiProperty({ required: false })
+    readonly address: string;
+}
 export class UserCreateDto {
     @Expose()
     @ApiProperty({ required: false })
@@ -88,4 +114,4 @@ export class UserUpdateDto {
     readonly status: number;
 }
 
-export class UserFilterDto extends FiltersDto {}
+export class UserFilterDto extends FiltersDto { }
