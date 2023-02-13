@@ -67,7 +67,7 @@ export const UserTokensSchema = new mongoose.Schema(
         },
     },
     {
-        collection: process.env.DB_PREFIX + 'user_tokens',
+        collection: 'user_tokens',
         timestamps: true,
     },
 );

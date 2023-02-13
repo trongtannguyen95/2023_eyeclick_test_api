@@ -44,7 +44,7 @@ export const RequestForgotPasswordsSchema = new mongoose.Schema(
         },
     },
     {
-        collection: process.env.DB_PREFIX + 'request_forgot_password',
+        collection: 'request_forgot_password',
         timestamps: true,
     },
 );

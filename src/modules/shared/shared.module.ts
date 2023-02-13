@@ -8,6 +8,8 @@ import { RequestForgotPasswordsSchema } from './services/schemas/request-forgot-
 import { UserActivitiesSchema } from './services/schemas/user-activities.schema';
 import { UserTokensSchema } from './services/schemas/user-tokens.schema';
 import { UsersSchema } from './services/schemas/users.schema';
+import { ShopItemsSchema } from './services/schemas/shop-items.schema';
+import { ShopItemsI18nSchema } from './services/schemas/shop-items-i18n.schema';
 @Module({
     imports: [
         ScheduleModule.forRoot(),
@@ -22,6 +24,8 @@ import { UsersSchema } from './services/schemas/users.schema';
             { name: 'UserTokens', schema: UserTokensSchema },
             { name: 'UserActivities', schema: UserActivitiesSchema },
             { name: 'RequestForgotPasswords', schema: RequestForgotPasswordsSchema },
+            { name: 'ShopItems', schema: ShopItemsSchema },
+            { name: 'ShopItemsI18n', schema: ShopItemsI18nSchema },
         ]),
     ],
     providers: [

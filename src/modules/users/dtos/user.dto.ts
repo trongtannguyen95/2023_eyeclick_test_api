@@ -30,17 +30,6 @@ export class UserRegisterDto {
     @Expose()
     @ApiProperty({ required: true })
     confirmPassword: string;
-    @Expose()
-    @ApiProperty({ required: false })
-    readonly phone: string;
-    @IsEmail()
-    @IsAlreadyExist({ service: UsersService, key: 'email' })
-    @Expose()
-    @ApiProperty({ required: true })
-    readonly email: string;
-    @Expose()
-    @ApiProperty({ required: false })
-    readonly address: string;
 }
 export class UserCreateDto {
     @Expose()

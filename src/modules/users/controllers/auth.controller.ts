@@ -262,7 +262,7 @@ export class AuthController {
         try {
             if(body['confirmPassword'] != body['password']){
                 responseData.statusCode = 422;
-                responseData.error = 'Password confirm is not correct';
+                responseData.message = 'Password confirm is not correct';
                 return res.status(HttpStatus.OK).json(responseData);
 
             }
@@ -271,10 +271,7 @@ export class AuthController {
                     username: body.username,
                     password: hashSync(body.password, 10),
                     isAdministrator: 0,
-                    email: body.email,
-                    address: body.address,
                     name: body.name,
-                    phone: body.phone || 'N/A',
                     status: 1,
                     deleted: 0,
                 },
@@ -297,12 +294,11 @@ export class AuthController {
                     userInfo,
                     token,
                 );
-                responseData.error = !checkSaveToken ? 'token not save!' : '';
                 responseData.data = token;
                 responseData.message = 'Registered successfully';
             }else{
                 responseData.statusCode = 400;
-                responseData.error = 'Registered unsuccessfully';
+                responseData.message = 'Registered unsuccessfully';
             }
             return res.status(HttpStatus.OK).json(responseData);
 

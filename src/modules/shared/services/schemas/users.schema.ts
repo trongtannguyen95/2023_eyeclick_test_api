@@ -42,29 +42,28 @@ export const UsersSchema = new mongoose.Schema(
         },
         phone: {
             type: String,
-            required: true,
+            required: false,
         },
         email: {
             type: String,
-            required: true,
-            unique: true,
+            required: false,
         },
         address: {
             type: String,
-            required: true,
+            required: false,
         },
-        roleId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Roles',
+        shoppingCart: {
+            type: Object,
+            required: false,
         },
         isAdministrator: {
             type: Number,
-            required: true,
+            required: false,
             default: 0,
         },
     },
     {
-        collection: process.env.DB_PREFIX + 'users',
+        collection: 'users',
         timestamps: true,
     },
 );

@@ -53,7 +53,7 @@ export const UserActivitiesSchema = new Schema(
         },
     },
     {
-        collection: process.env.DB_PREFIX + 'user_activities',
+        collection: 'user_activities',
         timestamps: true,
     },
 );

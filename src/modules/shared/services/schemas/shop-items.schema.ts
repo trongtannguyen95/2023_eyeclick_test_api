@@ -1,15 +1,27 @@
 import * as mongoose from 'mongoose';
 
 
-export const UserSettingsSchema = new mongoose.Schema(
+export const ShopItemsSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            required: false,
+            default: '',
         },
         description: {
             type: String,
-            required: true,
+            required: false,
+            default: '',
+        },
+        image: {
+            type: String,
+            required: false,
+            default: '',
+        },
+        price: {
+            type: Number,
+            required: false,
+            default: '',
         },
         deleted: {
             type: Number,
@@ -19,19 +31,7 @@ export const UserSettingsSchema = new mongoose.Schema(
         status: {
             type: Number,
             required: true,
-            default: 0,
-        },
-        configKey: {
-            type: String,
-            required: true,
-        },
-        configSetting: {
-            type: String,
-            required: true,
-        },
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Users',
+            default: 1,
         },
         created: {
             type: mongoose.Schema.Types.ObjectId,
@@ -43,7 +43,7 @@ export const UserSettingsSchema = new mongoose.Schema(
         },
     },
     {
-        collection: 'user_settings',
+        collection: 'shop_items',
         timestamps: true,
     },
 );

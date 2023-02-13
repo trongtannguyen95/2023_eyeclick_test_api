@@ -8,14 +8,12 @@ import { SharedModule } from './modules/shared/shared.module';
 import { UsersModule } from './modules/users/users.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
+import { ShopModule } from './modules/shop/shop.module';
+import { FrontendModule } from './modules/frontend/frontend.module';
 const routes: Routes = [
     {
-        path: '/admin',
-        children: [],
-    },
-    {
         path: '/app',
-        children: [UsersModule],
+        children: [UsersModule, ShopModule,FrontendModule],
     },
 ];
 
@@ -31,13 +29,15 @@ const routes: Routes = [
             loggerLevel: 'debug',
             autoIndex: true,
         }),
+        FrontendModule,
         UsersModule,
+        ShopModule,
         RouterModule.register(routes),
         ThrottlerModule.forRoot({
             ttl: 60,
             limit: 60,
         }),
-        
+
     ],
     controllers: [AppController],
     providers: [

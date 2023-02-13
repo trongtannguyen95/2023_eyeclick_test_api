@@ -12,6 +12,6 @@ export interface IUser extends Document {
     readonly phone?: string | any;
     readonly email?: string | any;
     readonly address?: string | any;
-    readonly roleId?: string | any;
     readonly isAdministrator?: number | any;
+    readonly shoppingCard?: object;
 }
