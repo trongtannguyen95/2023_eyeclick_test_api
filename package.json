@@ -28,7 +28,6 @@
     "@nestjs/throttler": "^3.0.0",
     "@nestjs/websockets": "^9.0.3",
     "@nestjsplus/cookies": "^1.0.2",
-    "@nestvn/config": "^1.0.0",
     "@socket.io/redis-adapter": "^7.0.0",
     "@socket.io/redis-emitter": "^4.1.0",
     "axios": "^0.27.2",
